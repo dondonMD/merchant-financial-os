@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from decimal import Decimal
 
 from sqlalchemy import JSON, DateTime, ForeignKey, Numeric, String, func
@@ -28,7 +28,11 @@ class Transaction(Base):
     note: Mapped[str | None] = mapped_column(String(240), nullable=True)
     device_id: Mapped[str | None] = mapped_column(String(120), nullable=True)
     location: Mapped[str | None] = mapped_column(String(120), nullable=True)
-    recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    recorded_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(UTC),
+        nullable=False,
+    )
     failure_reason: Mapped[str | None] = mapped_column(String(200), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
