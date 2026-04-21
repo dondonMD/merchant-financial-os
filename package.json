@@ -10,6 +10,9 @@
     "packages/ui",
     "packages/i18n"
   ],
+  "overrides": {
+    "next": "15.1.11"
+  },
   "scripts": {
     "dev:web": "npm --workspace @zb-vaka/web run dev",
     "build:web": "npm --workspace @zb-vaka/web run build",
