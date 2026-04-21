@@ -1,0 +1,20 @@
+{
+  "name": "zb-vaka",
+  "private": true,
+  "engines": {
+    "node": "22.x",
+    "npm": ">=10 <11"
+  },
+  "workspaces": [
+    "apps/web",
+    "packages/ui",
+    "packages/i18n"
+  ],
+  "scripts": {
+    "dev:web": "npm --workspace @zb-vaka/web run dev",
+    "build:web": "npm --workspace @zb-vaka/web run build",
+    "lint:web": "npm --workspace @zb-vaka/web run lint",
+    "typecheck:web": "npm --workspace @zb-vaka/web run typecheck",
+    "test:web": "npm --workspace @zb-vaka/web run test"
+  }
+}

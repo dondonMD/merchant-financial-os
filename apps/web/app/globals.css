@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink antialiased;
+}
+
+.panel {
+  @apply rounded-3xl border border-slate-200/70 bg-white shadow-panel;
+}
+
+.muted {
+  @apply text-sm text-slate-500;
+}
+
+.metric-card {
+  @apply panel p-5;
+}
+
