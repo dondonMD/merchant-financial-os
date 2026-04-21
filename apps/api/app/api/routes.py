@@ -78,6 +78,19 @@ def serialize_transaction(tx: Transaction) -> dict:
     }
 
 
+@router.get("")
+@router.get("/")
+async def api_root() -> dict:
+    return {
+        "success": True,
+        "data": {
+            "service": "api",
+            "status": "ok",
+            "health": "/api/v1/health",
+        },
+    }
+
+
 @router.get("/health")
 async def health() -> dict:
     return {"success": True, "data": {"status": "ok"}}
