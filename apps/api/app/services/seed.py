@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import UTC, datetime
 from decimal import Decimal
 
 from sqlalchemy import select
@@ -127,6 +128,7 @@ def seed_database(db: Session) -> None:
             category="qr_payment",
             device_id=merchant.device_hash,
             location=merchant.location,
+            recorded_at=datetime.now(UTC),
         )
         db.add(tx)
         db.flush()
