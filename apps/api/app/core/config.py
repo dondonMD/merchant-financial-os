@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     access_token_minutes: int = 30
     refresh_token_days: int = 14
     cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3002,http://127.0.0.1:3002"
+    cors_origin_regex: str | None = None
     frontend_url: str = "http://localhost:3002"
     seed_admin_email: str = "admin@zbvaka.co.zw"
     seed_admin_password: str = "Admin123!"

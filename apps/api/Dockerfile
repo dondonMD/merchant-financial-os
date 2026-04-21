@@ -7,5 +7,6 @@ ENV PYTHONUNBUFFERED=1
 
 COPY . .
 RUN pip install --no-cache-dir .
+RUN chmod +x /app/start.sh
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["/app/start.sh"]
