@@ -78,15 +78,15 @@ export default function AdminDashboardPage() {
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">{translate("recentTransactions")}</p>
                 <div className="mt-4 space-y-3">
                   {dashboard.recent_transactions.map((transaction) => (
-                    <div key={transaction.id} className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 px-4 py-3">
+                    <div key={transaction.id} className="flex flex-col gap-3 rounded-2xl border border-slate-200 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                       <div>
-                        <div className="flex items-center gap-3">
+                        <div className="flex flex-wrap items-center gap-3">
                           <p className="text-sm font-medium text-ink">{transaction.reference}</p>
                           <EvidenceBadge source={transaction.evidence_source} />
                         </div>
                         <p className="text-xs text-slate-500">{new Date(transaction.recorded_at).toLocaleString()}</p>
                       </div>
-                      <div className="text-right">
+                      <div className="sm:text-right">
                         <p className="text-sm font-semibold text-ink">${transaction.amount.toFixed(2)}</p>
                         <p className="text-xs text-slate-500">{translate("merchant")} {transaction.merchant_id}</p>
                       </div>
@@ -101,7 +101,7 @@ export default function AdminDashboardPage() {
                   <div className="mt-4 space-y-3">
                     {dashboard.fraud_alerts.map((alert) => (
                       <div key={alert.id} className="rounded-2xl border border-slate-200 px-4 py-3">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-start justify-between gap-4">
                           <p className="text-sm font-semibold text-ink">{alert.rule_code}</p>
                           <span className={`rounded-full px-3 py-1 text-xs font-semibold uppercase ${alert.severity === "high" ? "bg-rose-100 text-rose-700" : "bg-amber-100 text-amber-700"}`}>
                             {alert.severity}
@@ -119,7 +119,7 @@ export default function AdminDashboardPage() {
                     {dashboard.merchants.map((merchant) => (
                       <button
                         key={merchant.id}
-                        className="flex w-full items-center justify-between rounded-2xl bg-slate-50 px-4 py-3 text-left"
+                        className="flex w-full flex-col gap-2 rounded-2xl bg-slate-50 px-4 py-3 text-left sm:flex-row sm:items-center sm:justify-between"
                         onClick={() => {
                           if (!session) {
                             return;
@@ -186,9 +186,9 @@ export default function AdminDashboardPage() {
                     </div>
                     <div className="mt-5 space-y-3">
                       {selectedMerchant.transactions.slice(0, 4).map((transaction) => (
-                        <div key={transaction.id} className="flex items-center justify-between rounded-2xl bg-white px-4 py-3">
+                        <div key={transaction.id} className="flex flex-col gap-3 rounded-2xl bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                           <div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                               <p className="text-sm font-medium text-ink">{transaction.reference}</p>
                               <EvidenceBadge source={transaction.evidence_source} />
                             </div>

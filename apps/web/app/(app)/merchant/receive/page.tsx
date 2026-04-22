@@ -122,8 +122,8 @@ export default function MerchantReceivePage() {
             <div className="mt-6 rounded-[32px] bg-white p-4">
               {detail ? <QRCode value={detail.qr_profile.qr_payload} className="h-auto w-full" /> : null}
             </div>
-            <div className="mt-4 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
-              {translate("payload")}: <span className="font-mono">{detail?.qr_profile.qr_payload}</span>
+            <div className="mt-4 overflow-hidden rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+              {translate("payload")}: <span className="break-all font-mono">{detail?.qr_profile.qr_payload}</span>
             </div>
             <div className="mt-4 rounded-3xl bg-amber-50 p-4 text-sm text-slate-700">
               <p className="font-semibold text-amber-800">{translate("hybridEvidenceSupportTitle")}</p>
@@ -133,16 +133,16 @@ export default function MerchantReceivePage() {
 
           <section className="space-y-6">
             <div className="panel p-6">
-              <div className="inline-flex rounded-full bg-slate-100 p-1">
+              <div className="inline-flex w-full rounded-full bg-slate-100 p-1 sm:w-auto">
                 <button
-                  className={`rounded-full px-4 py-2 text-sm font-medium ${activeFlow === "qr" ? "bg-white text-ink shadow-sm" : "text-slate-500"}`}
+                  className={`flex-1 rounded-full px-4 py-2 text-sm font-medium sm:flex-none ${activeFlow === "qr" ? "bg-white text-ink shadow-sm" : "text-slate-500"}`}
                   onClick={() => setActiveFlow("qr")}
                   type="button"
                 >
                   {translate("qrReceiveTab")}
                 </button>
                 <button
-                  className={`rounded-full px-4 py-2 text-sm font-medium ${activeFlow === "cash" ? "bg-white text-ink shadow-sm" : "text-slate-500"}`}
+                  className={`flex-1 rounded-full px-4 py-2 text-sm font-medium sm:flex-none ${activeFlow === "cash" ? "bg-white text-ink shadow-sm" : "text-slate-500"}`}
                   onClick={() => setActiveFlow("cash")}
                   type="button"
                 >
@@ -199,13 +199,13 @@ export default function MerchantReceivePage() {
                 >
                   <div className="panel p-6">
                     <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">{translate("beforeAfterSplit")}</p>
-                    <div className="mt-4 flex items-center justify-between">
+                    <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <EvidenceBadge source={result.transaction.evidence_source} />
                       <p className="text-sm text-slate-500">{translate("evidenceType")}</p>
                     </div>
                     <div className="mt-4 space-y-4 text-sm text-slate-600">
                       {Object.entries(result.allocation).map(([key, value]) => (
-                        <div key={key} className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
+                        <div key={key} className="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 px-4 py-3">
                           <span>{translate(key as "operating" | "savings" | "growth")}</span>
                           <span className="font-semibold text-ink">${value.toFixed(2)}</span>
                         </div>
@@ -219,7 +219,7 @@ export default function MerchantReceivePage() {
                   <div className="panel p-6">
                     <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">{translate("digitalReceipt")}</p>
                     <div className="mt-4 rounded-[28px] border border-dashed border-slate-300 bg-gradient-to-br from-white to-slate-50 p-5">
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                         <div>
                           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-600">{translate("receipt")}</p>
                           <h3 className="mt-2 text-xl font-semibold text-ink">{receipt.receipt_number}</h3>
@@ -227,11 +227,11 @@ export default function MerchantReceivePage() {
                         {receipt.evidence_source ? <EvidenceBadge source={receipt.evidence_source} /> : null}
                       </div>
                       <div className="mt-6 space-y-3 text-sm text-slate-600">
-                        <div className="flex justify-between"><span>{translate("reference")}</span><span>{result.transaction.reference}</span></div>
-                        <div className="flex justify-between"><span>{translate("merchant")}</span><span>{detail?.merchant.business_name}</span></div>
-                        <div className="flex justify-between"><span>{translate("amount")}</span><span>${result.transaction.amount.toFixed(2)}</span></div>
-                        <div className="flex justify-between"><span>{translate("trustScoreNow")}</span><span>{result.trust_score.score} / {translate(tierKeyMap[result.trust_score.tier as keyof typeof tierKeyMap] ?? "starter")}</span></div>
-                        <div className="flex justify-between"><span>{translate("settlementStatus")}</span><span>{receipt.evidence_source ? translate(settlementLabelKey(receipt.evidence_source)) : "-"}</span></div>
+                        <div className="flex items-start justify-between gap-4"><span>{translate("reference")}</span><span className="max-w-[60%] break-words text-right">{result.transaction.reference}</span></div>
+                        <div className="flex items-start justify-between gap-4"><span>{translate("merchant")}</span><span className="max-w-[60%] text-right">{detail?.merchant.business_name}</span></div>
+                        <div className="flex items-start justify-between gap-4"><span>{translate("amount")}</span><span className="text-right">${result.transaction.amount.toFixed(2)}</span></div>
+                        <div className="flex items-start justify-between gap-4"><span>{translate("trustScoreNow")}</span><span className="max-w-[60%] text-right">{result.trust_score.score} / {translate(tierKeyMap[result.trust_score.tier as keyof typeof tierKeyMap] ?? "starter")}</span></div>
+                        <div className="flex items-start justify-between gap-4"><span>{translate("settlementStatus")}</span><span className="max-w-[60%] text-right">{receipt.evidence_source ? translate(settlementLabelKey(receipt.evidence_source)) : "-"}</span></div>
                       </div>
                     </div>
                   </div>

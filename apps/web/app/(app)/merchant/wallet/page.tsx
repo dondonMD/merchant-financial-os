@@ -103,7 +103,7 @@ export default function MerchantWalletPage() {
                     <p className="text-5xl font-semibold text-ink">{detail.trust_score.score}</p>
                     <p className="mt-2 text-lg text-brand-600">{translate(tierKeyMap[detail.trust_score.tier as keyof typeof tierKeyMap] ?? "starter")}</p>
                   </div>
-                  <div className="rounded-3xl bg-brand-50 px-5 py-4 text-right">
+                  <div className="rounded-3xl bg-brand-50 px-5 py-4 text-left sm:text-right">
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-600">{translate("whyItMatters")}</p>
                     <p className="mt-2 max-w-xs text-sm text-slate-600">{translate("trustWhyItMattersCopy")}</p>
                   </div>
@@ -192,12 +192,12 @@ export default function MerchantWalletPage() {
                 <div className="mt-4 space-y-4">
                   {detail.offers.length ? detail.offers.map((offer) => (
                     <div key={offer.id} className="rounded-3xl border border-slate-200 p-5">
-                      <div className="flex items-start justify-between gap-4">
+                      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div>
                           <h3 className="text-lg font-semibold text-ink">{offer.title}</h3>
                           <p className="mt-2 text-sm text-slate-600">{offer.description}</p>
                         </div>
-                        <div className="rounded-full bg-brand-50 px-3 py-2 text-sm font-semibold text-brand-700">
+                        <div className="w-fit rounded-full bg-brand-50 px-3 py-2 text-sm font-semibold text-brand-700">
                           {offer.quote_amount > 0 ? `$${offer.quote_amount.toFixed(2)}/mo` : translate("nudge")}
                         </div>
                       </div>
@@ -211,12 +211,12 @@ export default function MerchantWalletPage() {
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">{translate("recentLedger")}</p>
                 <div className="mt-4 space-y-3">
                   {detail.ledger_entries.map((entry) => (
-                    <div key={entry.id} className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
+                    <div key={entry.id} className="flex flex-col gap-3 rounded-2xl bg-slate-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                       <div>
                         <p className="text-sm font-medium text-ink">{entry.narrative}</p>
                         <p className="text-xs text-slate-500">{new Date(entry.created_at).toLocaleString()}</p>
                       </div>
-                      <div className="text-right">
+                      <div className="sm:text-right">
                         <p className="text-sm font-semibold text-ink">${entry.amount.toFixed(2)}</p>
                         <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{translate(entry.pocket as "operating" | "savings" | "growth")}</p>
                       </div>
@@ -253,13 +253,13 @@ export default function MerchantWalletPage() {
                 </ResponsiveContainer>
               </div>
               <div className="mt-6 rounded-3xl bg-slate-900 p-6 text-white">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">{translate("projectionLogic")}</p>
                     <p className="mt-2 text-lg font-semibold">{translate("bankableMilestone")}</p>
                     <p className="mt-1 text-sm text-slate-400">{translate("creditLimitHint")}</p>
                   </div>
-                  <div className="text-right">
+                  <div className="sm:text-right">
                     <p className="text-3xl font-bold">12 {translate("days")}</p>
                     <p className="text-xs uppercase tracking-widest text-slate-400">{translate("daysLeftToLevelUp")}</p>
                   </div>

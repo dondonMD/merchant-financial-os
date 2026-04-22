@@ -42,18 +42,18 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-hero">
-      <div className="mx-auto grid min-h-screen max-w-7xl gap-10 px-6 py-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div className="mx-auto grid min-h-screen max-w-7xl gap-10 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <section className="space-y-8">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand-600">{translate("appName")}</p>
-              <h1 className="mt-4 max-w-3xl text-5xl font-semibold leading-tight text-ink">
+              <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-ink sm:text-5xl">
                 {translate("landingHeadline")}
               </h1>
             </div>
             <LanguageSwitcher />
           </div>
-          <p className="max-w-2xl text-lg leading-8 text-slate-600">
+          <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
             {translate("landingBody")}
           </p>
           <div className="grid gap-4 md:grid-cols-3">
@@ -74,7 +74,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <section className="panel p-8">
+        <section className="panel p-6 sm:p-8">
           <div className="mb-8">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">{translate("login")}</p>
             <h2 className="mt-2 text-3xl font-semibold text-ink">{translate("welcomeBack")}</h2>

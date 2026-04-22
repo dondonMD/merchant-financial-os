@@ -32,9 +32,9 @@ export default function MerchantTransactionsPage() {
           {detail ? (
             <div className="mt-6 space-y-4">
               {detail.transactions.length ? detail.transactions.map((transaction) => (
-                <div key={transaction.id} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 px-4 py-4">
+                <div key={transaction.id} className="flex flex-col gap-4 rounded-2xl border border-slate-200 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-3">
                       <p className="text-sm font-semibold text-ink">{transaction.reference}</p>
                       <EvidenceBadge source={transaction.evidence_source} />
                     </div>
@@ -42,11 +42,11 @@ export default function MerchantTransactionsPage() {
                       {transaction.payer_name} · {new Date(transaction.recorded_at).toLocaleString()}
                     </p>
                   </div>
-                  <div className="text-right">
+                  <div className="sm:text-right">
                     <p className="text-sm font-semibold text-ink">${transaction.amount.toFixed(2)}</p>
                     <Link
                       href={`/merchant/transactions/${transaction.id}`}
-                      className="mt-2 inline-block rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-700"
+                      className="mt-2 inline-block w-fit rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-700"
                     >
                       {translate("viewReceipt")}
                     </Link>

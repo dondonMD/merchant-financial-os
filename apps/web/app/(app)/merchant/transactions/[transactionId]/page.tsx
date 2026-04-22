@@ -49,11 +49,11 @@ export default function ReceiptPage() {
         <div className="panel mx-auto max-w-3xl p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">{translate("receiptView")}</p>
           {receipt ? (
-            <div className="mt-6 rounded-[32px] border border-dashed border-slate-300 bg-gradient-to-br from-white to-slate-50 p-6">
-              <div className="flex items-center justify-between gap-4">
+            <div className="mt-6 rounded-[32px] border border-dashed border-slate-300 bg-gradient-to-br from-white to-slate-50 p-5 sm:p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-600">{translate("digitalReceipt")}</p>
-                  <h2 className="mt-2 text-3xl font-semibold text-ink">{receipt.receipt_number}</h2>
+                  <h2 className="mt-2 break-words text-2xl font-semibold text-ink sm:text-3xl">{receipt.receipt_number}</h2>
                 </div>
                 {receipt.evidence_source ? <EvidenceBadge source={receipt.evidence_source} /> : null}
               </div>
@@ -61,7 +61,7 @@ export default function ReceiptPage() {
                 {Object.entries(receipt.payload).map(([key, value]) => (
                   <div key={key} className="flex items-start justify-between gap-4 border-b border-slate-100 pb-3">
                     <span>{translate(labelMap[key as keyof typeof labelMap] ?? "reference")}</span>
-                    <span className="max-w-[60%] text-right font-medium text-ink">
+                    <span className="max-w-[58%] break-words text-right font-medium text-ink sm:max-w-[60%]">
                       {key === "evidence_type" && receipt.evidence_source ? translate(evidenceLabelKey(receipt.evidence_source)) : null}
                       {key === "evidence_source" && receipt.evidence_source ? translate(evidenceLabelKey(receipt.evidence_source)) : null}
                       {key === "settlement_status" && receipt.evidence_source ? translate(settlementLabelKey(receipt.evidence_source)) : null}
