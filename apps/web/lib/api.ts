@@ -1,5 +1,16 @@
 import type { AdminDashboard, MerchantDetail, PaymentResult, ReceiptDetail, Session } from "./types";
 
+type CashSalePayload = {
+  amount: number;
+  payer_name?: string;
+  payer_phone?: string;
+  category: string;
+  note?: string;
+  location: string;
+  device_id: string;
+  recorded_at: string;
+};
+
 function getApiBaseUrl() {
   if (process.env.NEXT_PUBLIC_API_BASE_URL) {
     return process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -28,6 +39,20 @@ async function request<T>(path: string, init?: RequestInit, accessToken?: string
     throw new Error(payload.detail ?? payload.error ?? "Request failed");
   }
   return payload.data;
+}
+
+function normalizeOptionalText(value?: string) {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : undefined;
+}
+
+export function normalizeCashSalePayload(payload: CashSalePayload): CashSalePayload {
+  return {
+    ...payload,
+    payer_name: normalizeOptionalText(payload.payer_name),
+    payer_phone: normalizeOptionalText(payload.payer_phone),
+    note: normalizeOptionalText(payload.note),
+  };
 }
 
 export async function seedDemo() {
@@ -102,20 +127,11 @@ export async function simulatePayment(session: Session, payload: Record<string, 
 
 export async function recordCashSale(
   session: Session,
-  payload: {
-    amount: number;
-    payer_name?: string;
-    payer_phone?: string;
-    category: string;
-    note?: string;
-    location: string;
-    device_id: string;
-    recorded_at: string;
-  }
+  payload: CashSalePayload
 ) {
   return request<PaymentResult>("/payments/cash", {
     method: "POST",
-    body: JSON.stringify(payload)
+    body: JSON.stringify(normalizeCashSalePayload(payload))
   }, session.accessToken);
 }
 
